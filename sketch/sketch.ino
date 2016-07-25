@@ -54,7 +54,7 @@ class MotorIO{
 };
 
 /* 制御のクラス */
-class IO: public ServoIO, public MotorIO{
+class Control: public ServoIO, public MotorIO{
   void error(void){
     digitalWrite(errorPin,HIGH); 
   }
@@ -74,11 +74,11 @@ class IO: public ServoIO, public MotorIO{
     }
 };
 
-IO io;
+Control ctrl;
 
 void setup(){
-  io.errorPin=13;
-  io.servoPin.attach(9);
+  ctrl.errorPin=13;
+  ctrl.servoPin.attach(9);
 }
 
 void loop(){
