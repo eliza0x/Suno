@@ -1,6 +1,5 @@
 Control
 --
-- servo :: Servo
 - errorPinNum :: Int
 - putError :: Void
 - angleMove :: Int -> Bool -> Void
