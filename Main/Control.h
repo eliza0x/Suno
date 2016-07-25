@@ -57,7 +57,7 @@ class MotorIO{ //{{{
       isStop = false;
       isBrake = false;
     }
-    void setMoveStop(){ /* 停止するよう状態を変更 */
+    void setStop(){ /* 停止するよう状態を変更 */
       isStop = true;
     }
     void setBrake(){ /* ブレーキするよう状態を変更 */
