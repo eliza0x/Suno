@@ -1,39 +1,39 @@
 Control
 --
-- errorPin             	 
+- errorPin :: Int
 --
-- putError             	 
-- setAngleAndDirection 	 
-- setErrorPin          	 
+- putError :: Void
+- setAngleAndDirection :: Int -> Bool -> Void
+- setErrorPin :: Int -> Void
 - setMoveLeftBackward  	 
-- setMoveLeftFoward    	 
-- setMoveRightBackward 	 
-- setMoveRightFoward   	 
+- setMoveLeftFoward :: Void
+- setMoveRightBackward :: Void
+- setMoveRightFoward :: Void
 
 ==
 
 MotorIO
 --
-- isBrake            m 	 
-- isMoveFoward       m 	 
-- isStop             m 	 
+- isBrake :: Bool
+- isMoveFoward :: Bool
+- isStop :: Bool
 --
-- brake              f 	 
-- moveBackward       f 	 
-- moveFoward         f 	 
-- stop               f 	 
-+ setBrake           f 	 
-+ setMoveBackward    f 	 
-+ setMoveFoward      f 	 
-+ setStop            f 	 
-+ updateMotorState   f 	 
+- brake :: Void
+- moveBackward :: Void
+- moveFoward :: Void
+- stop :: Void
++ setBrake :: Void
++ setMoveBackward :: Void
++ setMoveFoward :: Void
++ setStop :: Void
++ updateMotorState :: Void
 
 ==
 
 ServoIO
 --
-- servo        m 	 
+- servo :: Servo
 --
-- angleCalc    f 	 
-# rotateServo  f 	 
-+ setServoPin  f 	 
+- angleCalc :: Int -> Int -> Int
+# rotateServo :: Int -> Void
++ setServoPin :: Int -> Void
