@@ -58,22 +58,36 @@ class MotorIO{
        motorState.isBrake      != changedMotorState.isBrake      ){
       motorState = changedMotorState;
       if(motorState.isBrake){
-        // Brake code here...
+        brake();
         return;
       }
       if(motorState.isStop){
-        // Stop code here...
+        stop();
         return;
       }
       if(motorState.isMoveFoward){
-        // Move Foward code here...
+        moveFoward();
         return;
       } else {
-        // Move backward code here...
+        moveBackward();
         return;
       }     
     }
   }
+
+  void brake(){
+    // Brake code here...
+  }
+  void stop(){
+    // Stop code here...
+  }
+  void moveFoward(){
+    // Move Foward code here...
+  }
+  void moveBackward(){
+    // Move backward code here...
+  }
+
   public:
     /* 前進するよう状態を変更 */
     void toMoveFoward(){
@@ -132,6 +146,3 @@ void setup(){
 void loop(){
   ctrl.updateMotorState();
 }
-
-
-
