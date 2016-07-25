@@ -2,7 +2,7 @@
 #include <Servo.h>
 
 /* サーボモータの制御クラス */
-class ServoIO{
+class ServoIO{ //{{{
 
   Servo servo; /* サーボのピン */
 
@@ -32,10 +32,10 @@ class ServoIO{
     void servoPin(int pin){
       servo.attach(pin);
     }
-};
+}; //}}}
 
 /* モータの制御クラス */
-class MotorIO{
+class MotorIO{ //{{{
 
   /* モータの状態を表す型 */
   struct MotorState{
@@ -105,10 +105,10 @@ class MotorIO{
     void updateMotorState(){
       motor();
     }
-};
+};//}}}
 
 /* 制御のクラス */
-class Control: public ServoIO, public MotorIO{
+class Control: public ServoIO, public MotorIO{ //{{{
   int errorPinNum; /* エラーピンの番号を表す */
   void error(void){
     digitalWrite(errorPinNum,HIGH); 
@@ -134,7 +134,7 @@ class Control: public ServoIO, public MotorIO{
       errorPinNum = pin;
       pinMode(pin,OUTPUT);
     }
-};
+};//}}}
 
 Control ctrl;
 
