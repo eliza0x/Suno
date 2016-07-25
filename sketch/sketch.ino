@@ -59,14 +59,18 @@ class MotorIO{
       motorState = changedMotorState;
       if(motorState.isBrake){
         // Brake code here...
+        return;
       }
       if(motorState.isStop){
         // Stop code here...
+        return;
       }
       if(motorState.isMoveFoward){
-          // Move Foward code here...
-        } else {
-         // Move backward code here...
+        // Move Foward code here...
+        return;
+      } else {
+        // Move backward code here...
+        return;
       }
     }
   }
