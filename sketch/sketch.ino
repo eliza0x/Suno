@@ -3,51 +3,82 @@
 
 /* サーボモータの制御クラス */
 class ServoIO{
+
+  Servo servo; /* サーボのピン */
+
+  /* サーボモータが可動範囲外に回転するのを防ぐ関数*/
   int angleCalc(const int currentAngle, const int difference){
     const int sum = currentAngle + difference;
-    if(sum < 5){return 0;}
-    if(sum > 175){return 180;}
+    if(sum < 5){return 0;}      /* 5度以下なら0度を返す */
+    if(sum > 175){return 180;}  /* 175度以上なら180度を返す */
     return currentAngle + difference; 
   }
+
   protected:
+
+    /* サーボを回転させる関数 */
+    /* 値は0~180の間で */
     void rotateServo(const int difference){
-      const int currentAngle = servoPin.read();
+      const int currentAngle = servo.read();
       const int changedAngle = angleCalc(currentAngle, difference);
-      servoPin.write(changedAngle);
+      if(currentAngle != changedAngle){
+        servo.write(changedAngle);
+      }
     }
+
   public:
-    Servo servoPin;
+    /* サーボモータのピンを設定する関数 */
+    /* 無くても良いが、あると統一感が生まれる */
+    void servoPin(int pin){
+      servo.attach(pin);
+    }
 };
 
 /* モータの制御クラス */
 class MotorIO{
+
+  /* モータの状態を表す型 */
   struct MotorState{
-    bool isMoveFoward;
-    bool isStop;
+    bool isMoveFoward; /* 前進するか */
+    bool isStop;       /* 停止するか */
   };
+  
+  /* モータの現在の状態
+     もう少し良い方法があれば書き直す */
   MotorState motorState = {true, false};
+
+  /* モータの変更後の状態
+     現在と違う状態がセットされていればmotor関数が状態を変更する */
+  MotorState changedMotorState = {true, false};
+
   void motor(){
-    if(! motorState.isStop){
-      if(motorState.isMoveFoward){
-        // Move Foward code here...
+    if(motorState.isMoveFoward != changedMotorState.isMoveFoward  ||
+       motorState.isStop != changedMotorState.isStop){
+      if(! motorState.isStop){
+        if(motorState.isMoveFoward){
+          // Move Foward code here...
+        } else {
+         // Move backward code here...
+        }
       } else {
-       // Move backward code here...
+        // Stop code here...
       }
-    } else {
-      // Stop code here...
     }
   }
-  protected:
-    void moveFoward(){
-      motorState = {true,false};
-    }
-    void moveBackward(){
-      motorState = {false,false};
-    }
-    void moveStop(){
-      motorState = {true,true};
-    }
   public:
+    /* 前進するよう状態を変更 */
+    void moveFoward(){
+      changedMotorState = {true,false};
+    }
+    /* 後退するよう状態を変更 */
+    void moveBackward(){
+      changedMotorState = {false,false};
+    }
+    /* 停止するよう状態を変更 */
+    void moveStop(){
+      changedMotorState = {true,true};
+    }
+    /* モータの状態を更新 */
     void updateMotorState(){
       motor();
     }
@@ -55,35 +86,42 @@ class MotorIO{
 
 /* 制御のクラス */
 class Control: public ServoIO, public MotorIO{
+  int errorPinNum; /* エラーピンの番号を表す */
   void error(void){
-    digitalWrite(errorPin,HIGH); 
+    digitalWrite(errorPinNum,HIGH); 
   }
-  void angleMove(int angle, bool isFoward){
+
+  /* moveFooBarの抽象化関数 */
+  void angleMove(const int angle, const bool isFoward){
     rotateServo(angle);
     if(isFoward){moveFoward();}else{moveBackward();}
   }
   
   public:
-    void leftFoward(){angleMove(-30, true);}
-    void rightFoward(){angleMove(30, true);}
-    void leftBackward(){angleMove(-30, false);}
-    void rightBackward(){angleMove(30, false);}
-    int errorPin;
-    void setup(){
-      pinMode(errorPin,OUTPUT);
+    /* 左前に移動するよう状態を変更 */
+    void moveLeftFoward(){angleMove(-30, true);}
+    /* 右前に移動するよう状態を変更 */
+    void moveRightFoward(){angleMove(30, true);}
+    /* 左後に移動するよう状態を変更 */
+    void moveLeftBackward(){angleMove(-30, false);}
+    /* 右後に移動するよう状態を変更 */
+    void moveRightBackward(){angleMove(30, false);}
+    /* エラーLEDのピンを設定する関数 */
+    void errorPin(const int pin){
+      errorPinNum = pin;
+      pinMode(pin,OUTPUT);
     }
 };
 
 Control ctrl;
 
 void setup(){
-  ctrl.errorPin=13;
-  ctrl.servoPin.attach(9);
+  ctrl.errorPin(13);
+  ctrl.servoPin(9);
 }
 
 void loop(){
-//  rotateServo(90); 
-//  rotateServo(-90); 
+  ctrl.updateMotorState();
 }
 
 
