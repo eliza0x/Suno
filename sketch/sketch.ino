@@ -41,42 +41,47 @@ class MotorIO{
   struct MotorState{
     bool isMoveFoward; /* 前進するか */
     bool isStop;       /* 停止するか */
+    bool isBrake;      /* ブレーキするか */
   };
   
   /* モータの現在の状態
      もう少し良い方法があれば書き直す */
-  MotorState motorState = {true, false};
+  MotorState motorState = {true, false, false};
 
   /* モータの変更後の状態
      現在と違う状態がセットされていればmotor関数が状態を変更する */
-  MotorState changedMotorState = {true, false};
+  MotorState changedMotorState = {true, false, false};
 
   void motor(){
-    if(motorState.isMoveFoward != changedMotorState.isMoveFoward  ||
-       motorState.isStop != changedMotorState.isStop){
-      if(! motorState.isStop){
-        if(motorState.isMoveFoward){
+    if(motorState.isMoveFoward != changedMotorState.isMoveFoward ||
+       motorState.isStop       != changedMotorState.isStop       ||
+       motorState.isBrake      != changedMotorState.isBrake      ){
+      motorState = changedMotorState;
+      if(motorState.isBrake){
+        // Brake code here...
+      }
+      if(motorState.isStop){
+        // Stop code here...
+      }
+      if(motorState.isMoveFoward){
           // Move Foward code here...
         } else {
          // Move backward code here...
-        }
-      } else {
-        // Stop code here...
       }
     }
   }
   public:
     /* 前進するよう状態を変更 */
     void moveFoward(){
-      changedMotorState = {true,false};
+      changedMotorState = {true,false, false};
     }
     /* 後退するよう状態を変更 */
     void moveBackward(){
-      changedMotorState = {false,false};
+      changedMotorState = {false,false, false};
     }
     /* 停止するよう状態を変更 */
     void moveStop(){
-      changedMotorState = {true,true};
+      changedMotorState = {true,true, false};
     }
     /* モータの状態を更新 */
     void updateMotorState(){
