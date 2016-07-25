@@ -4,10 +4,10 @@ Control
 - putError :: Void
 - angleMove :: Int -> Bool -> Void
 --
-+ toMoveLeftFoward :: Void
-+ toMoveRightFoward :: Void
-+ toMoveLeftBackward :: Void
-+ toMoveRightBackward :: Void
++ setMoveLeftFoward :: Void
++ setMoveRightFoward :: Void
++ setMoveLeftBackward :: Void
++ setMoveRightBackward :: Void
 + errorPin :: Void
 
 ServoIO
