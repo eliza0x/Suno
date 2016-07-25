@@ -15,7 +15,6 @@ class ServoIO{ //{{{
   }
 
   protected:
-
     /* サーボを回転させる関数 */
     /* 値は0~180の間で */
     void rotateServo(const int difference){
@@ -29,7 +28,7 @@ class ServoIO{ //{{{
   public:
     /* サーボモータのピンを設定する関数 */
     /* 無くても良いが、あると統一感が生まれる */
-    void servoPin(int pin){
+    void servoPin(const int pin){
       servo.attach(pin);
     }
 }; //}}}
@@ -37,35 +36,44 @@ class ServoIO{ //{{{
 /* モータの制御クラス */
 class MotorIO{ //{{{
 
-  /* モータの状態を表す型 */
-  struct MotorState{
-    bool isMoveFoward; /* 前進するか */
-    bool isStop;       /* 停止するか */
-    bool isBrake;      /* ブレーキするか */
-  };
-  
-  /* モータの現在の状態
-     もう少し良い方法があれば書き直す */
-  MotorState motorState = {true, false, false};
+  /* 優先度は Brake > Stop > Otherewise */
+  bool isMoveFoward; /* 前進するか */
+  bool isStop;       /* 停止するか */
+  bool isBrake;      /* ブレーキするか */
 
-  /* モータの変更後の状態
-     現在と違う状態がセットされていればmotor関数が状態を変更する */
-  MotorState changedMotorState = {true, false, false};
+  void brake(){/* Brake code here... */}
+  void stop(){/* Stop code here... */}
+  void moveFoward(){/* Move Foward code here... */}
+  void moveBackward(){/* Move backward code here... */}
 
-  void motor(){
-    if(motorState.isMoveFoward != changedMotorState.isMoveFoward ||
-       motorState.isStop       != changedMotorState.isStop       ||
-       motorState.isBrake      != changedMotorState.isBrake      ){
-      motorState = changedMotorState;
-      if(motorState.isBrake){
+  public:
+    void toMoveFoward(){ /* 前進するよう状態を変更 */
+      isMoveFoward = true;
+      isStop = false;
+      isBrake = false;
+    }
+    void toMoveBackward(){ /* 後退するよう状態を変更 */
+      isMoveFoward = false;
+      isStop = false;
+      isBrake = false;
+    }
+    void toMoveStop(){ /* 停止するよう状態を変更 */
+      isStop = true;
+    }
+    void toBrake(){ /* ブレーキするよう状態を変更 */
+      isBrake = true;
+    }
+
+    void updateMotorState(){ /* モータの状態を更新 */
+       if(isBrake){
         brake();
         return;
       }
-      if(motorState.isStop){
+      if(isStop){
         stop();
         return;
       }
-      if(motorState.isMoveFoward){
+      if(isMoveFoward){
         moveFoward();
         return;
       } else {
@@ -73,65 +81,35 @@ class MotorIO{ //{{{
         return;
       }     
     }
-  }
-
-  void brake(){
-    // Brake code here...
-  }
-  void stop(){
-    // Stop code here...
-  }
-  void moveFoward(){
-    // Move Foward code here...
-  }
-  void moveBackward(){
-    // Move backward code here...
-  }
-
-  public:
-    /* 前進するよう状態を変更 */
-    void toMoveFoward(){
-      changedMotorState = {true,false, false};
-    }
-    /* 後退するよう状態を変更 */
-    void toMoveBackward(){
-      changedMotorState = {false,false, false};
-    }
-    /* 停止するよう状態を変更 */
-    void toMoveStop(){
-      changedMotorState = {true,true, false};
-    }
-    /* モータの状態を更新 */
-    void updateMotorState(){
-      motor();
-    }
 };//}}}
 
-/* 制御のクラス */
+/* 制御 クラス */
 class Control: public ServoIO, public MotorIO{ //{{{
-  int errorPinNum; /* エラーピンの番号を表す */
-  void error(void){
-    digitalWrite(errorPinNum,HIGH); 
+  int errorPinNumber; /* エラーピンの番号を表す */
+
+  void putError(void){
+    digitalWrite(errorPinNumber, HIGH); 
   }
 
   /* moveFooBarの抽象化関数 */
-  void angleMove(const int angle, const bool isFoward){
+  void setAngleAndDirection(const int angle, const bool isFoward){
     rotateServo(angle);
     if(isFoward){toMoveFoward();}else{toMoveBackward();}
   }
   
   public:
     /* 左前に移動するよう状態を変更 */
-    void toMoveLeftFoward(){angleMove(-30, true);}
+    void setMoveLeftFoward(){setAngleAndDirection(-30, true);}
     /* 右前に移動するよう状態を変更 */
-    void toMoveRightFoward(){angleMove(30, true);}
+    void setMoveRightFoward(){setAngleAndDirection(30, true);}
     /* 左後に移動するよう状態を変更 */
-    void toMoveLeftBackward(){angleMove(-30, false);}
+    void setMoveLeftBackward(){setAngleAndDirection(-30, false);}
     /* 右後に移動するよう状態を変更 */
-    void toMoveRightBackward(){angleMove(30, false);}
+    void setMoveRightBackward(){setAngleAndDirection(30, false);}
+    
     /* エラーLEDのピンを設定する関数 */
     void errorPin(const int pin){
-      errorPinNum = pin;
+      errorPinNumber = pin;
       pinMode(pin,OUTPUT);
     }
 };//}}}
