@@ -47,20 +47,20 @@ class MotorIO{ //{{{
   void moveBackward(){/* Move backward code here... */}
 
   public:
-    void toMoveFoward(){ /* 前進するよう状態を変更 */
+    void setMoveFoward(){ /* 前進するよう状態を変更 */
       isMoveFoward = true;
       isStop = false;
       isBrake = false;
     }
-    void toMoveBackward(){ /* 後退するよう状態を変更 */
+    void setMoveBackward(){ /* 後退するよう状態を変更 */
       isMoveFoward = false;
       isStop = false;
       isBrake = false;
     }
-    void toMoveStop(){ /* 停止するよう状態を変更 */
+    void setMoveStop(){ /* 停止するよう状態を変更 */
       isStop = true;
     }
-    void toBrake(){ /* ブレーキするよう状態を変更 */
+    void setBrake(){ /* ブレーキするよう状態を変更 */
       isBrake = true;
     }
 
@@ -94,7 +94,7 @@ class Control: public ServoIO, public MotorIO{ //{{{
   /* moveFooBarの抽象化関数 */
   void setAngleAndDirection(const int angle, const bool isFoward){
     rotateServo(angle);
-    if(isFoward){toMoveFoward();}else{toMoveBackward();}
+    if(isFoward){setMoveFoward();}else{setMoveBackward();}
   }
   
   public:
