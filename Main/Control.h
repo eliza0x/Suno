@@ -88,7 +88,7 @@ class Control: public ServoIO, public MotorIO{ //{{{
   int errorPin; /* エラーピンの番号を表す */
 
   void putError(void){
-    digitalWrite(errorPinNumber, HIGH); 
+    digitalWrite(errorPin, HIGH); 
   }
 
   /* moveFooBarの抽象化関数 */

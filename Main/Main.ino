@@ -5,8 +5,8 @@
 Control ctrl;
 
 void setup(){
-  ctrl.errorPin(13);
-  ctrl.servoPin(9);
+  ctrl.setErrorPin(13);
+  ctrl.setServoPin(9);
 }
 
 void loop(){
