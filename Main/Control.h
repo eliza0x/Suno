@@ -113,14 +113,3 @@ class Control: public ServoIO, public MotorIO{ //{{{
       pinMode(pin,OUTPUT);
     }
 };//}}}
-
-Control ctrl;
-
-void setup(){
-  ctrl.errorPin(13);
-  ctrl.servoPin(9);
-}
-
-void loop(){
-  ctrl.updateMotorState();
-}
