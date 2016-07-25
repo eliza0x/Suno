@@ -28,7 +28,7 @@ class ServoIO{ //{{{
   public:
     /* サーボモータのピンを設定する関数 */
     /* 無くても良いが、あると統一感が生まれる */
-    void servoPin(const int pin){
+    void setServoPin(const int pin){
       servo.attach(pin);
     }
 }; //}}}
@@ -85,7 +85,7 @@ class MotorIO{ //{{{
 
 /* 制御 クラス */
 class Control: public ServoIO, public MotorIO{ //{{{
-  int errorPinNumber; /* エラーピンの番号を表す */
+  int errorPin; /* エラーピンの番号を表す */
 
   void putError(void){
     digitalWrite(errorPinNumber, HIGH); 
@@ -108,8 +108,8 @@ class Control: public ServoIO, public MotorIO{ //{{{
     void setMoveRightBackward(){setAngleAndDirection(30, false);}
     
     /* エラーLEDのピンを設定する関数 */
-    void errorPin(const int pin){
-      errorPinNumber = pin;
+    void setErrorPin(const int pin){
+      errorPin = pin;
       pinMode(pin,OUTPUT);
     }
 };//}}}
