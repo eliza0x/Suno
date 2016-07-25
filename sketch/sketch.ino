@@ -71,20 +71,20 @@ class MotorIO{
       } else {
         // Move backward code here...
         return;
-      }
+      }     
     }
   }
   public:
     /* 前進するよう状態を変更 */
-    void moveFoward(){
+    void toMoveFoward(){
       changedMotorState = {true,false, false};
     }
     /* 後退するよう状態を変更 */
-    void moveBackward(){
+    void toMoveBackward(){
       changedMotorState = {false,false, false};
     }
     /* 停止するよう状態を変更 */
-    void moveStop(){
+    void toMoveStop(){
       changedMotorState = {true,true, false};
     }
     /* モータの状態を更新 */
@@ -103,18 +103,18 @@ class Control: public ServoIO, public MotorIO{
   /* moveFooBarの抽象化関数 */
   void angleMove(const int angle, const bool isFoward){
     rotateServo(angle);
-    if(isFoward){moveFoward();}else{moveBackward();}
+    if(isFoward){toMoveFoward();}else{toMoveBackward();}
   }
   
   public:
     /* 左前に移動するよう状態を変更 */
-    void moveLeftFoward(){angleMove(-30, true);}
+    void toMoveLeftFoward(){angleMove(-30, true);}
     /* 右前に移動するよう状態を変更 */
-    void moveRightFoward(){angleMove(30, true);}
+    void toMoveRightFoward(){angleMove(30, true);}
     /* 左後に移動するよう状態を変更 */
-    void moveLeftBackward(){angleMove(-30, false);}
+    void toMoveLeftBackward(){angleMove(-30, false);}
     /* 右後に移動するよう状態を変更 */
-    void moveRightBackward(){angleMove(30, false);}
+    void toMoveRightBackward(){angleMove(30, false);}
     /* エラーLEDのピンを設定する関数 */
     void errorPin(const int pin){
       errorPinNum = pin;
