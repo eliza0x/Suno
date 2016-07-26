@@ -1,4 +1,3 @@
-/* サーボのヘッダファイルを準備 */
 #include "Control.h"
 
 Control ctrl;
