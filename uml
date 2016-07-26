@@ -2,16 +2,10 @@ Control
 
 ==
 
-Motor
+MotorIO
 --
 - firstPin :: Int
 - secondPin :: Int
-
-==
-
-MotorIO
---
-- motor :: Motor
 --
 - setMotorState :: Int -> Int -> Void
 + moveBackward :: Void

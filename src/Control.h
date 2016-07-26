@@ -20,26 +20,25 @@ class ServoIO{
 
 /* モータの制御クラス */
 class MotorIO{
-  struct Motor{
-    int firstPin;
-    int secondPin;
-  };
-  Motor motor = {LOW, LOW};
+  int firstPin;
+  int secondPin;
   
   void setMotorState(const int fst, const int snd){
-    digitalWrite(motor.firstPin, fst);
-    digitalWrite(motor.secondPin, snd);
+    digitalWrite(firstPin, fst);
+    digitalWrite(secondPin, snd);
   }
   public:
     void brake(){setMotorState(HIGH,HIGH);}
     void stop(){setMotorState(LOW,LOW);}
     void moveFoward(){setMotorState(HIGH,LOW);}
     void moveBackward(){setMotorState(LOW,HIGH);}
-    void setMotorPin(const int fstPin, const int sndPin){
-      motor = {fstPin, sndPin};
-      pinMode(fstPin, OUTPUT);
-      pinMode(sndPin, OUTPUT);
-      setMotorState(fstPin, sndPin);
+
+    void setMotorPin(const int fst, const int snd){
+      firstPin = fst;
+      secondPin = snd;
+      pinMode(firstPin, OUTPUT);
+      pinMode(secondPin, OUTPUT);
+      setMotorState(firstPin, secondPin);
     }
 };
 
