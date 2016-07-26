@@ -1,43 +1,14 @@
-#
-# Template #1: General project. Test it using existing `platformio.ini`.
-#
-
 language: python
 python:
-    - "2.7"
-
+- '2.7'
 sudo: false
 cache:
-    directories:
-        - "~/.platformio"
-
+  directories:
+  - "~/.platformio"
 install:
-    - pip install -U platformio
-
+- pip install -U platformio
 script:
-    - platformio run
-
-
-#
-# Template #2: The project is intended to by used as a library with examples
-#
-
-# language: python
-# python:
-#     - "2.7"
-#
-# sudo: false
-# cache:
-#     directories:
-#         - "~/.platformio"
-#
-# env:
-#     - PLATFORMIO_CI_SRC=path/to/test/file.c
-#     - PLATFORMIO_CI_SRC=examples/file.ino
-#     - PLATFORMIO_CI_SRC=path/to/test/directory
-#
-# install:
-#     - pip install -U platformio
-#
-# script:
-#     - platformio ci --lib="." --board=TYPE_1 --board=TYPE_2 --board=TYPE_N
+- platformio run
+notifications:
+  slack:
+    secure: IpE0li7wu3bZGzfYcbab2WcNPjurCJLOit3OZ7yGh3/pBBRlaUI8k8tk4frwup4A9ooxascZE7QohdskA3WrJCbbp52WqVDcMIG5b0UKFfR4suuAW49rUR9TtYbaSFRdzAY5d5dReS7zpWFafM85gpEml4obrZSIPnbepZnLQfsVZaSvMweJLp1+o9PhoYjKspyRUSXah0lT2aY7bLL8+kFYseY9/RkFoQ0ZUR+gRhV4Tu2BX3DhG5g4NC5XnmzO0uhKT75QiOFdIandbC2gJRWoLWJaHGLtfR7rhLHEyqnwxN0cK+515kmn7c0gGrxa27Iqd5KEJDPRSVam31AubriGFEFXswgpxOfGVthkx9N2xMPJCSIaMdBYNb4pIv3651nH1UXO/ZsC6/yD1lJfk9Fg4NXLYgte1BvUFdeRR6l8Bq0MIi9PZHXUFET9HtLoR5wnfO7udIuMCNoNMMvyoMlo8Gsoo4m9+rtTgz2m8r5JNT9n1M5K9CIvPNAI4SX51efNew7MvMdetlCgpRITbBm0tCifd8y6UarXBPsHqPn951StOEH9CWENS+91eMSrMzwCBicqfyXV7MTNpunOL8zXiEJfkHtE/EhVB3+M2E8P7UvIBSjQ5lVt34w2mM794gCLaBkCoKgTuM2zuN9EwjIRAon+6PPCmVYPaC0Lz2o=
