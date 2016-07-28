@@ -1,20 +1,22 @@
-#include "VarSpeedServo.h"
+// #include "VarSpeedServo.h"
+#include "Servo.h"
 #include "Error.h"
 
 /* サーボモータの制御クラス */
 class ServoIO{
   
-  VarSpeedServo servo; /* サーボのピン */
+  Servo servo; /* サーボのピン */
   protected:
     /* サーボを回転させる関数 */
     void rotateAngle(const int angle){
-      servo.write(angle, 30, false);
+      // servo.write(angle, 30, false);
+      servo.write(angle);
     }
   public:
     /* サーボモータのピンを設定する関数 */
     void setServoPin(const int pin){
-      servo.attach(pin, 544, 2400);
-      servo.write(0, 255, true);
+      servo.attach(pin);
+      servo.write(0);
     }
 };
 
