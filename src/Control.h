@@ -1,9 +1,11 @@
 #include "Servo.h"
 #include "Error.h"
+#include "Order.h"
 
 class ServoIO{
   
   Servo servo;
+
   protected:
     void rotateAngle(const int angle){
       servo.write(angle);
@@ -38,4 +40,33 @@ class MotorIO{
     }
 };
 
-class Control: public ServoIO, public MotorIO, public Error{};
+class Control: public ServoIO, public MotorIO, public Error{
+ 
+  public:
+    void move(const Order order){
+      switch(order.direction){
+        case 0:
+          moveFoward();
+          switch(order.angle){
+            case 0:
+              rotateAngle(330);
+            case 1:
+              rotateAngle(0);
+            case 2:
+              rotateAngle(30);
+          }
+        case 1:
+          brake();
+        case 2:
+          moveBackward();
+          switch(order.angle){
+            case 0:
+              rotateAngle(30);
+            case 1:
+              rotateAngle(0);
+            case 2:
+              rotateAngle(330);
+          }
+      }
+    }
+};
