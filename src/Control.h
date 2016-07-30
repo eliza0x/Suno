@@ -6,11 +6,10 @@ class ServoIO{
   
   Servo servo;
 
-  protected:
+  public:
     void rotateAngle(const int angle){
       servo.write(angle);
     }
-  public:
     void setServoPin(const int pin){
       servo.attach(pin);
       servo.write(0);
