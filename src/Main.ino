@@ -1,8 +1,8 @@
-#include "Tuner.h"
-// #include "Control.h"
-// #include "Order.h"
+#include <Server.h>
+// #include <Control.h>
+// #include <Order.h>
 
-Tuner tuner;
+SunoServer tuner;
 // Control ctrl;
 
 void setup(){
