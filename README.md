@@ -38,7 +38,7 @@ ServoMotor
 書き込み
 `$ platformio run --target=upload`
 
-情報をうけとる
+シリアルモニタに接続
 `$ platformio serialports monitor`
 
 ## VERSION
