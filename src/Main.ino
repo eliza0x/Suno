@@ -1,20 +1,20 @@
 #include <SunoServer.hpp>
 #include <Control.hpp>
 
-SunoServer tuner;
+SunoServer serv;
 Control ctrl;
 String str;
 
 void setup(){
   ctrl.setMotorPin(12, 13);
   ctrl.setServoPin(16);
-  tuner.wakeup("SunoController", "password");
+  serv.wakeup("SunoController", "password");
   delay(2500);
   Serial.begin(9600);
 } 
 
 void loop(){
-  str = tuner.fetchOrder();
+  str = serv.fetchOrder();
   move(str);
   delay(200);
 }
