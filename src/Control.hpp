@@ -1,6 +1,5 @@
 #include <Servo.h>
-#include <Error.h>
-#include <Order.h>
+#include <Error.hpp>
 
 class ServoIO{
   
@@ -12,7 +11,7 @@ class ServoIO{
     }
     void setServoPin(const int pin){
       servo.attach(pin);
-      servo.write(0);
+      servo.write(90);
     }
 };
 
@@ -39,33 +38,4 @@ class MotorIO{
     }
 };
 
-class Control: public ServoIO, public MotorIO, public Error{
- 
-  public:
-    void move(const Order order){
-      switch(order.direction){
-        case 0:
-          moveFoward();
-          switch(order.angle){
-            case 0:
-              rotateAngle(330);
-            case 1:
-              rotateAngle(0);
-            case 2:
-              rotateAngle(30);
-          }
-        case 1:
-          brake();
-        case 2:
-          moveBackward();
-          switch(order.angle){
-            case 0:
-              rotateAngle(30);
-            case 1:
-              rotateAngle(0);
-            case 2:
-              rotateAngle(330);
-          }
-      }
-    }
-};
+class Control: public ServoIO, public MotorIO, public Error{};

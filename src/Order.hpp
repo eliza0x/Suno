@@ -1,11 +1,8 @@
 #ifndef ORDER
 #define ORDER
 
-class Order{
-
-  public:
-    int direction=1;
-    int angle=1;
+struct Order{
+  int direction=0;
+  int angle=0;
 };
-
 #endif
