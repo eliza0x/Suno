@@ -8,15 +8,15 @@ String str;
 void setup(){
   ctrl.setMotorPin(12, 13);
   ctrl.setServoPin(16);
-  tuner.wakeup("Buffalo-G-5040", "ww5xmrmwh7kxn");
-  delay(3000);
+  tuner.wakeup("SunoController", "password");
+  delay(2500);
   Serial.begin(9600);
 } 
 
 void loop(){
   str = tuner.fetchOrder();
   move(str);
-  delay(100);
+  delay(200);
 }
 
 void move(String req){

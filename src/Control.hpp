@@ -19,9 +19,9 @@ class MotorIO{
   int firstPin;
   int secondPin;
   
-  void setMotorState(const int fst, const int snd){
-    digitalWrite(firstPin, fst);
-    digitalWrite(secondPin, snd);
+  void setMotorState(const int fstState, const int sndState){
+    digitalWrite(firstPin,  fstState);
+    digitalWrite(secondPin, sndState);
   }
   public:
     void brake(){setMotorState(HIGH,HIGH);}
