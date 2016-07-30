@@ -31,8 +31,8 @@ void searchAngle(String str){
 }
 
 void searchDirection(String str){
-  if(str.indexOf("Foward")   != -1){ctrl.moveFoward();}
-  if(str.indexOf("Neutral")  != -1){ctrl.stop();}
+  if(str.indexOf("Forward")   != -1){ctrl.moveFoward();}
   if(str.indexOf("Backward") != -1){ctrl.moveBackward();}
+  if(str.indexOf("Stop")  != -1){ctrl.stop();}
   if(str.indexOf("Brake") != -1){ctrl.brake();}
 }

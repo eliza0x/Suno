@@ -31,6 +31,7 @@ class SunoServer {
           req = client.readStringUntil('\n');
           Serial.println(req);
           delay(1);
+          client.println(req);
           client.stop();
         }
       }
