@@ -1,16 +1,21 @@
-#include <SunoServer.hpp>
-#include <Control.hpp>
+#include "SunoServer.hpp"
+#include "Control.hpp"
+#include "Error.hpp"
 
 SunoServer serv;
 Control ctrl;
 String str;
 
 void setup(){
+  // We can use 12,13,4,5,16 and TOUT
+  // TOUT estas analoga pinglo
+  serv.setErrorPin(4, 5);
+  Serial.begin(9600);
+  delay(100);
   ctrl.setMotorPin(12, 13);
   ctrl.setServoPin(16);
   serv.wakeup("SunoController", "password");
   delay(2500);
-  Serial.begin(9600);
 } 
 
 void loop(){

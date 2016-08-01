@@ -1,5 +1,4 @@
 #include <Servo.h>
-#include <Error.hpp>
 
 class ServoIO{
   
@@ -38,4 +37,4 @@ class MotorIO{
     }
 };
 
-class Control: public ServoIO, public MotorIO, public Error{};
+class Control: public ServoIO, public MotorIO {};
