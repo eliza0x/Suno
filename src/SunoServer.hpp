@@ -8,7 +8,7 @@ class SunoServer: public Error {
  
   public:
     void wakeup(const char* ssid, const char* password) {
-      putWarning();
+      putError();
       Serial.println();
       Serial.print("Connecting to ");
       Serial.print(ssid);
@@ -21,7 +21,7 @@ class SunoServer: public Error {
       server.begin();
       Serial.println("Server started");
       Serial.println(WiFi.localIP());
-      clearWarning();
+      clearError();
     }
     
     String fetchOrder(){
