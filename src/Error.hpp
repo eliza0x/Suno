@@ -1,12 +1,23 @@
+#pragma once
+
 class Error{
   int errorPin;
-   void setErrorPin(const int pin){
-    errorPin = pin;
-    pinMode(pin,OUTPUT);
-  }
- 
+  int warningPin;
   protected:
+    void clearWarning(void){
+      digitalWrite(warningPin, LOW); 
+    }
+    void putWarning(void){
+      digitalWrite(warningPin, HIGH); 
+    }
     void putError(void){
-      digitalWrite(errorPin, HIGH); 
+      digitalWrite(errorPin, HIGH);
+    }
+  public: 
+    void setErrorPin(const int wPin, const int ePin){
+      warningPin = wPin;
+      errorPin = ePin;
+      pinMode(wPin,OUTPUT);
+      pinMode(ePin,OUTPUT);
     }
 };
