@@ -1,6 +1,5 @@
 #include "SunoServer.hpp"
 #include "Control.hpp"
-#include "Error.hpp"
 
 SunoServer serv;
 Control ctrl;
@@ -14,7 +13,7 @@ void setup(){
   delay(100);
   ctrl.setMotorPin(12, 13);
   ctrl.setServoPin(16);
-  serv.wakeup("SunoController", "password");
+  serv.wakeup("SunoServer", "ww5xmrmwh7kxn");
   delay(2500);
 } 
 
