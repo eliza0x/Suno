@@ -32,7 +32,7 @@ SSIDが`taiyoooo`,Passwordが`mofumofu`のWifiスポットを準備してくだ�
 書き込み: `$ platformio run --target=upload`
 シリアルモニタに接続: `$ platformio serialports monitor`
 
-![UML](https://raw.githubusercontent.com/eliza0x/Suno/master/UML.png)
+![UML](https://raw.githubusercontent.com/eliza0x/Suno/master/UML.svg)
 
 ## VERSION
 
