@@ -7,35 +7,30 @@ SunoはESP8266(ESP-WROOM-02)で制御する無線ソーラーカーです、て�
 
 ## USAGE
 
-SSIDが`taiyoooo`,Passwordが`mofumofu`のWifi(IEEE 802.11)を準備してください。
-あとは`http://$ESP8266_IP_ADDRESS$/Forward/Right`のように接続すれば制御できます。
+SSIDが`taiyoooo`,Passwordが`mofumofu`のWifiスポットを準備してください。
+接続後`http://$ESP8266_IP_ADDRESS$/Move/Right`のようにアクセスすれば制御できます。
 
 `$ESP8266_IP_ADDRESS$`は環境によって変動します、シリアル通信で確認してください。ESP8266の起動後すぐに送られてくる筈です。
 
 使える命令
-Motor
 - Move
 - Stop
-
-ServoMotor
 - Right
 - Center
 - Left
 
-それぞれの命令がURLにふくまれていればその通り動作するはずです。
+命令がURLにふくまれていればその通り動作するはずです。
 
 ## CIRCUIT
 
+![Circuit](https://raw.githubusercontent.com/eliza0x/Suno/master/Circuit.png)
 
-## HACKING
+## PROGRAMING
 
 [PlatformIO](http://platformio.org/)でESP8266にプログラムを書き込んでいます。
 
-書き込み
-`$ platformio run --target=upload`
-
-シリアルモニタに接続
-`$ platformio serialports monitor`
+書き込み: `$ platformio run --target=upload`
+シリアルモニタに接続: `$ platformio serialports monitor`
 
 ![UML](https://raw.githubusercontent.com/eliza0x/Suno/master/UML.png)
 
