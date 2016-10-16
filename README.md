@@ -25,7 +25,7 @@ SSIDが`taiyoooo`,Passwordが`mofumofu`のWifiスポットを準備してくだ�
 
 ![Circuit](https://raw.githubusercontent.com/eliza0x/Suno/master/Circuit.png)
 
-## PROGRAMING
+## PROGRAMMING
 
 [PlatformIO](http://platformio.org/)でESP8266にプログラムを書き込んでいます。
 
