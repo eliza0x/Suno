@@ -7,17 +7,15 @@ SunoはESP8266(ESP-WROOM-02)で制御する無線ソーラーカーです、て�
 
 ## USAGE
 
-SSIDが`Taiyoooo`,Passwordが`mofumofu`のWifi(IEEE 802.11)を準備してください。
+SSIDが`taiyoooo`,Passwordが`mofumofu`のWifi(IEEE 802.11)を準備してください。
 あとは`http://$ESP8266_IP_ADDRESS$/Forward/Right`のように接続すれば制御できます。
 
 `$ESP8266_IP_ADDRESS$`は環境によって変動します、シリアル通信で確認してください。ESP8266の起動後すぐに送られてくる筈です。
 
 使える命令
 Motor
-- Forward 
-- Backward
+- Move
 - Stop
-- Brake
 
 ServoMotor
 - Right
