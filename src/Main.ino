@@ -8,7 +8,6 @@ String str;
 void setup(){
   // We can use 12,13,4,5,16 and TOUT
   // TOUT estas analoga pinglo
-  serv.setErrorPin(4, 5);
   Serial.begin(9600);
   delay(100);
   ctrl.setMotorPin(12, 13);

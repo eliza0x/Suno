@@ -1,14 +1,12 @@
 #include <ESP8266WiFi.h>
-#include "Error.hpp"
 
 WiFiServer server(80);
 WiFiClient client;
 
-class SunoServer: public Error {
+class SunoServer {
  
   public:
     void wakeup(const char* ssid, const char* password) {
-      putError();
       Serial.println();
       Serial.print("Connecting to ");
       Serial.print(ssid);
@@ -21,7 +19,6 @@ class SunoServer: public Error {
       server.begin();
       Serial.println("Server started");
       Serial.println(WiFi.localIP());
-      clearError();
     }
     
     String fetchOrder(){
