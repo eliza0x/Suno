@@ -8,9 +8,9 @@ String str;
 void setup(){
   Serial.begin(9600);
   delay(100);
-  ctrl.setMotorPin(4);
-  ctrl.setServoPin(14);
-  serv.wakeup("taiyoooo", "mofumofu",5);
+  ctrl.setMotorPin(14);
+  ctrl.setServoPin(5);
+  serv.wakeup("taiyoooo", "mofumofu",12);
   delay(2500);
 } 
 

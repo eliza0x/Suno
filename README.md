@@ -36,7 +36,7 @@ SSIDが`taiyoooo`,Passwordが`mofumofu`のWifiスポットを準備してくだ�
 
 ## VERSION
 
-0.0.1
+1.0.0
 
 ## LICENCE
 
